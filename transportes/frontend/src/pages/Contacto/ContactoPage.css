@@ -31,6 +31,16 @@
     align-items: start;
 }
 
+.formulario p input,
+.formulario p textarea {
+    width: 100%;
+    background: #ddd;
+    border-radius: 5px;
+    border: 1px solid #999;
+    font-size: 14px;
+    padding: 6px 10px;
+}
+
 .formulario textarea {
     resize: none;
     height: 150px;
