@@ -8,7 +8,6 @@ require('dotenv').config();
 var pool = require('./models/bd');
 var session = require('express-session');
 
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/admin/login');
