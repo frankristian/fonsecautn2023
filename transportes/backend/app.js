@@ -4,14 +4,18 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+
 require('dotenv').config();
-var pool = require('./models/bd');
+// var pool = require('./models/bd');
 var session = require('express-session');
+var fileupload = require('express-fileupload');
+var cors = require('cors')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/admin/login');
 var adminNovedadesRouter = require('./routes/admin/novedades');
+var apiRouter = require('./routes/api');
 
 var app = express();
 
@@ -32,6 +36,11 @@ app.use(session({
   saveUninitialized: true
 }
 ));
+
+app.use(fileupload({
+  useTempFiles: true,
+  tempFileDir: '/tmp/'
+}));
 
 var secured = async (req, res, next) => {
   try {
@@ -54,6 +63,9 @@ app.use('/admin/login', loginRouter)
 
 // novedades
 app.use('/admin/novedades', secured, adminNovedadesRouter);
+
+//apis
+app.use('/api', cors(), apiRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
